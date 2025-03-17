@@ -1,0 +1,23 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lim7687/database.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lim7687/database/issues"
+  },
+  "homepage": "https://github.com/lim7687/database#readme",
+  "description": "",
+  "dependencies": {
+    "mongodb": "^6.14.2"
+  }
+}
