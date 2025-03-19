@@ -10,7 +10,7 @@ async function main() {
         await client.connect();
         const endTime = Date.now();
         console.log("Connected to MongoDB!");
-        console.log('Time taken:${endTime - startTime}ms');
+        console.log(`Time taken:${endTime - startTime}ms`);
 
         const db = client.db("testDB");
         const collection = db.collection("users");
