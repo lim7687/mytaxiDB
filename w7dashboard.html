@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Passenger Analytics Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 15px;
+    }
+    thead tr {
+      background: #0d6efd;
+      color: #fff;
+      font-weight: 600;
+    }
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    tbody tr:hover {
+      background-color: #f1f5ff;
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead tr {
+        display: none;
+      }
+      tbody tr {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      tbody td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+      tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: calc(50% - 30px);
+        font-weight: 600;
+        text-align: left;
+      }
+    }
+    canvas {
+      margin-top: 40px;
+      max-width: 100%;
+      height: auto !important;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Passenger Analytics Dashboard</h1>
+    <table id="analyticsTable" aria-label="Passenger analytics data">
+      <thead>
+        <tr>
+          <th>Passenger Name</th>
+          <th>Total Rides</th>
+          <th>Total Fare ($)</th>
+          <th>Average Distance (km)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <canvas id="fareChart" aria-label="Total Fare per Passenger Bar Chart" role="img"></canvas>
+  </div>
+
+  <footer>
+    Data sourced from your MongoDB backend & Express API
+  </footer>
+
+  <script>
+    async function fetchAnalytics() {
+      try {
+        const response = await fetch('http://localhost:3000/analytics/passengers');
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+
+        const tbody = document.querySelector("#analyticsTable tbody");
+        tbody.innerHTML = ''; // Clear old data if any
+
+        const labels = [];
+        const fares = [];
+
+        data.forEach(passenger => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td data-label="Passenger Name">${passenger.name}</td>
+            <td data-label="Total Rides">${passenger.totalRides}</td>
+            <td data-label="Total Fare ($)">${passenger.totalFare.toFixed(2)}</td>
+            <td data-label="Average Distance (km)">${passenger.avgDistance.toFixed(2)}</td>
+          `;
+          tbody.appendChild(row);
+
+          labels.push(passenger.name);
+          fares.push(passenger.totalFare);
+        });
+
+        // Remove previous chart instance if any
+        if(window.fareChartInstance) {
+          window.fareChartInstance.destroy();
+        }
+
+        // Bar Chart
+        const ctx = document.getElementById('fareChart').getContext('2d');
+        window.fareChartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Total Fare per Passenger ($)',
+              data: fares,
+              backgroundColor: 'rgba(13, 110, 253, 0.7)',
+              borderColor: 'rgba(13, 110, 253, 1)',
+              borderWidth: 1,
+              borderRadius: 5,
+              maxBarThickness: 40,
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: true },
+              tooltip: {
+                callbacks: {
+                  label: context => `$${context.parsed.y.toFixed(2)}`
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Fare Amount ($)'
+                }
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: 'Passengers'
+                }
+              }
+            }
+          }
+        });
+      } catch (error) {
+        alert("Failed to load data. Is your Express server running?");
+        console.error(error);
+      }
+    }
+
+    fetchAnalytics();
+  </script>
+</body>
+</html>
