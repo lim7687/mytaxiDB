@@ -1,0 +1,374 @@
+{
+	"info": {
+		"_postman_id": "04ae2d0b-a235-440e-8429-2163293da1cf",
+		"name": "mytaxi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43927505",
+		"_collection_link": "https://limxh7687-5479629.postman.co/workspace/limxh7687's-Workspace~7ce39ca2-4217-48fa-87ed-31088f52da44/collection/43927505-04ae2d0b-a235-440e-8429-2163293da1cf?action=share&source=collection_link&creator=43927505"
+	},
+	"item": [
+		{
+			"name": "registerAdmin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin1\",\r\n  \"password\": \"adminpass123\",\r\n  \"name\": \"Super Admin\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/registerAdmin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"registerAdmin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"passenger3\",\r\n  \"password\": \"passpass789\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mytaxi-backend-amgefqhherged4fg.eastasia-01.azurewebsites.net/login",
+					"protocol": "https",
+					"host": [
+						"mytaxi-backend-amgefqhherged4fg",
+						"eastasia-01",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registerUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc1MDQyMzY2NCwiZXhwIjoxNzUwNDI3MjY0fQ.uTet6sWKTGmIoHjJvPwR-2NxLUcEJAc5NYo4yzTOgSs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"driver1\",\r\n  \"password\": \"driverpass123\",\r\n  \"role\": \"Driver\",\r\n  \"name\": \"Driver Lim\",\r\n  \"phone\": \"011-2345678\",\r\n  \"car\": {\r\n    \"model\": \"Toyota Vios\",\r\n    \"plate\": \"JDJ2687\"\r\n  }\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/registerUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"registerUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "requestRide",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhc3NlbmdlcjMiLCJyb2xlIjoiUGFzc2VuZ2VyIiwiaWF0IjoxNzUwNTE4NjUwLCJleHAiOjE3NTA1MjIyNTB9.xM1p4v708IsmRRS389htk5Y_SyZr9-6lZFQWdXLHI3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"pickup\": \"Taman Bukit Indah\",\r\n  \"destination\": \"Mid Valley Sothkey\",\r\n  \"time\": \"2025-06-19 19:00\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mytaxi-backend-amgefqhherged4fg.eastasia-01.azurewebsites.net/requestRide",
+					"protocol": "https",
+					"host": [
+						"mytaxi-backend-amgefqhherged4fg",
+						"eastasia-01",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"requestRide"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acceptRide    ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRyaXZlcjEiLCJyb2xlIjoiRHJpdmVyIiwiaWF0IjoxNzUwNDI1NDA2LCJleHAiOjE3NTA0MjkwMDZ9.U4cpkuZZSDI-6IV69PKnkoEvPhQwWwom2UGb5RLJqvg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/acceptRide/68555eb4fc714ea37357af7c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"acceptRide",
+						"68555eb4fc714ea37357af7c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "requestsWithPassengerInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRyaXZlcjEiLCJyb2xlIjoiRHJpdmVyIiwiaWF0IjoxNzUwNDIwODk5LCJleHAiOjE3NTA0MjQ0OTl9.uA622EhijdnwUgiACz1fm57yPsvS1Jz6Ersz6wbQ1Hw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/requestsWithPassengerInfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"requestsWithPassengerInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "myRides",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRyaXZlcjEiLCJyb2xlIjoiRHJpdmVyIiwiaWF0IjoxNzUwNDIwODk5LCJleHAiOjE3NTA0MjQ0OTl9.uA622EhijdnwUgiACz1fm57yPsvS1Jz6Ersz6wbQ1Hw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/myRides",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"myRides"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRyaXZlcjEiLCJyb2xlIjoiRHJpdmVyIiwiaWF0IjoxNzUwNDIwODk5LCJleHAiOjE3NTA0MjQ0OTl9.uA622EhijdnwUgiACz1fm57yPsvS1Jz6Ersz6wbQ1Hw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"car\": {\r\n    \"model\": \"Toyota Vios\",\r\n    \"plate\": \"JDJ2687\"\r\n  }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/updateProfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"updateProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAccount",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "myAcceptedRides",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhc3NlbmdlcjIiLCJyb2xlIjoiUGFzc2VuZ2VyIiwiaWF0IjoxNzUwNDI0MDAwLCJleHAiOjE3NTA0Mjc2MDB9.SHGzYT1qYFJEqs1ewEflgBEis-p9W5SHsicTcNdUnr4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/myAcceptedRides",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"myAcceptedRides"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ridesSummary",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc1MDQyNDE1MywiZXhwIjoxNzUwNDI3NzUzfQ.XU0R7NN0FFJGBCDy7eLsWIfmy-qNev0TVmJTNnq3WIs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/admin/ridesSummary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"admin",
+						"ridesSummary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "completeRide    ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRyaXZlcjEiLCJyb2xlIjoiRHJpdmVyIiwiaWF0IjoxNzUwNDI1NDA2LCJleHAiOjE3NTA0MjkwMDZ9.U4cpkuZZSDI-6IV69PKnkoEvPhQwWwom2UGb5RLJqvg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/completeRide/6852c770eda59700bb0fcbc4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"completeRide",
+						"6852c770eda59700bb0fcbc4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
