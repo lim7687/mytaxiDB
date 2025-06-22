@@ -70,5 +70,5 @@ A Node.js + MongoDB backend system for a ride-hailing platform tailored for UTeM
 
 ## 🌐 Live Deployment (Azure)
 
-This backend is deployed on **Microsoft Azure App Service** and is connected to **MongoDB Atlas**. You can test it via Postman using:
+This backend is deployed on **Microsoft Azure App Service** and is connected to **MongoDB Atlas**. We can test it via Postman using the generated url link by Azure
 
